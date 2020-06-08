@@ -61,12 +61,13 @@ fi
 
 
 done
-echo Luckiest day $luckyDay amount is $maxAmount
-echo Unluckiest day $unLuckyDay amount is $minAmount
 
 echo "days wins ${!wins[@]}--------$((50*$win))"
 echo "days looses ${!loose[@]}-------$((50*$lose))"
-echo "Total amount by end of day $saveAmount"
+
+echo Luckiest day $luckyDay amount is $maxAmount
+echo Unluckiest day $unLuckyDay amount is $minAmount
+
 
 
 
