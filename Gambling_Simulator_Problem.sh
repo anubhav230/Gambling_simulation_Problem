@@ -2,12 +2,22 @@
 WIN=1
 STAKE=100
 BET=1
-betCheck=$((RANDOM%2))
+MAX_PROFIT_PER_DAY=50
+MAX_LOSS_PER_DAY=-50
+wallet=0
+while [[ $wallet -lt $MAX_PROFIT_PER_DAY && $wallet -gt $MAX_LOSS_PER_DAY ]]
+do
+	betCheck=$((RANDOM%2))
+	if [ $WIN -eq $betCheck ]
+	then
+		wallet=$(($wallet+$BET))
+	else
+		wallet=$(($wallet-$BET))
+	fi
+done
 
-if [ $WIN -eq $betCheck ]
-then
-	echo "Winner won 1$"
-else
-	echo "Lost 1$ "
-fi
+echo "$wallet"
+echo "wallet amout =$(($STAKE+$wallet))"
+
+
 
