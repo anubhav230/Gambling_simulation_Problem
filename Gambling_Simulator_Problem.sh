@@ -4,7 +4,7 @@ STAKE=100
 BET=1
 MAX_PROFIT_PER_DAY=50
 MAX_LOSS_PER_DAY=-50
-saveAmount=0
+saveAmount=100
 totalWin=0
 totalLose=0
 for (( day=1; day<=30; day++))
@@ -30,11 +30,16 @@ else
 	loose[$day]=$wallet
 	((totalLose++))
 fi
-saveAmount=$(($totalAmount+$wallet))
+saveAmount=$(($saveAmount+$wallet))
 done
 echo "days wins ${!wins[@]}--------$((50*$totalWin))"
 echo "days looses ${!loose[@]}-------$((50*$totalLose))"
-echo "Total amount by end of day $saveAmount"
+if (( $saveAmount >= 0 ))
+then
+	echo "Total profit amount $saveAmount"
+else
+	echo "Total loose amoutn $saveAmount"
+fi
 
 
 
