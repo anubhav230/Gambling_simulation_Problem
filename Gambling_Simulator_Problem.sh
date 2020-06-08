@@ -16,7 +16,6 @@ lose=0
 luckyDay=0
 unLuckyDay=0
 day=0
-perDayWin=0
 for (( day=1; day<=30; day++))
 do
 	wallet=0
@@ -30,17 +29,14 @@ do
 			wallet=$(($wallet-$BET))
 		fi
 	done
-echo $wallet
 
 if [ $wallet -eq 50 ]
 then
 	wins[$day]=$wallet
 	((win++))
-	#perDayWin=$day
 else
 	loose[$day]=$wallet
 	((lose++))
-	#perDayLose=$day
 fi
 saveAmount=$(($saveAmount+$wallet))
 echo "----/  $saveAmount"
@@ -55,10 +51,6 @@ then
 	luckyDay=$(($day))
 	maxAmount=$saveAmount
 fi
-
-#echo "$minAmount"
-#echo "$maxAmount"
-
 
 done
 
