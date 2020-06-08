@@ -4,9 +4,10 @@ STAKE=100
 BET=1
 MAX_PROFIT_PER_DAY=50
 MAX_LOSS_PER_DAY=-50
-count=0
-totalAmount=0
-for (( day=1; day<=20; day++))
+saveAmount=0
+win=0
+lose=0
+for (( day=1; day<=30; day++))
 do
 	wallet=0
 	while [[ $wallet -lt $MAX_PROFIT_PER_DAY && $wallet -gt $MAX_LOSS_PER_DAY ]]
@@ -20,11 +21,20 @@ do
 		fi
 	done
 echo $wallet
-dayResult[((count++))]=$wallet
-totalAmount=$(($totalAmount+($STAKE+$wallet)))
+
+if [ $wallet -eq 50 ]
+then
+	wins[$day]=$wallet
+	((win++))
+else
+	loose[$day]=$wallet
+	((lose++))
+fi
+saveAmount=$(($totalAmount+$wallet))
 done
-echo "result for every day ${dayResult[@]}"
-echo "Total amount by end of day $totalAmount"
+echo "days wins ${!wins[@]}--------$((50*$win))"
+echo "days looses ${!loose[@]}-------$((50*$lose))"
+echo "Total amount by end of day $saveAmount"
 
 
 
